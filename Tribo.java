@@ -18,20 +18,19 @@ public class Tribo {
         linha = lerArq.readLine(); //pula para a segunda linha
         String nomeDoPaideTodos = linha.split(" ")[0];
         System.out.println("criando um barbaro com nome e posse de "+nomeDoPaideTodos +" e "+posseDoPaiDeTodos);
-
-        ArvoreGenealogicaDePosse arvore = new ArvoreGenealogicaDePosse(new Barbaro(nomeDoPaideTodos, posseDoPaiDeTodos));
+        ArvoreGenealogicaDePosse arvore = new ArvoreGenealogicaDePosse(new Barbaro(nomeDoPaideTodos, 0,posseDoPaiDeTodos));
 
         while (linha != null) {
-          System.out.print(linha);
+          String nomeDoPai = linha.split(" ")[0];
+          String nomeDoFilho = linha.split(" ")[1];
+          String herancaDoFilho = linha.split(" ")[2];
 
-          System.out.print("  splitting: ");
-          for (String var : linha.split(" ")) {
-            System.out.print(var.toString()+ " e ");
-          }        
-          System.out.println("");
+          
           
           linha = lerArq.readLine(); //pula para a proxima linha;
         }
+
+        System.out.println("raiz criada: "+arvore.getRaiz().nome + "e terras de "+arvore.getRaiz().getTerras());
    
         arq.close();
       } catch (IOException e) {
