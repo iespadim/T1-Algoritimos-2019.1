@@ -2,6 +2,7 @@
     "configurations": [
         {
             "type": "java",
+            
             "name": "CodeLens (Launch) - Tribo",
             "request": "launch",
             "mainClass": "Tribo"
