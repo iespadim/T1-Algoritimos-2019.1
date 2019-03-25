@@ -14,67 +14,59 @@ public class ArvoreGenealogicaDePosse{
     }
 
 
-    public Barbaro buscarBarbaro(String nome, Barbaro b, int nivel){        
+    public Barbaro buscarBarbaro(String nome, Barbaro b, int nivel, boolean encontrou){        
         Barbaro encontrado = null;
 
         if(b.getNome().equals(nome)){            
-            p("achamos "+ b.getNome());
+            // p(nivel+"Encontrado "+ b.getNome()+"!");
             encontrado = b;
+            
         }else{
-            p("não é "+ b.getNome());            
-            if(b.getFilhos().size()>0){
-                p("procurando nos  "+b.getFilhos().size()+" filhos de "+b.getNome());
-                for (Barbaro filho : b.getFilhos()) {
-                    encontrado = buscarBarbaro(nome, filho, nivel++);            
-                }    
-            }else{
-                p(b.getNome()+" não tem filhos.");
+            if(encontrou == false){
+                // p(nivel+"não é "+ b.getNome()+", ");            
+                if(b.getFilhos().size()>0){
+                    //  System.out.println(nivel+"procurando nos  "+b.getFilhos().size()+" filhos de "+b.getNome());
+                    nivel++;
+                    for (Barbaro filho : b.getFilhos()) {
+                        // p(nivel+"->filho "+filho.getNome());                   
+                        encontrado = buscarBarbaro(nome, filho, nivel, false);
+                        if( encontrado != null && encontrado.getNome().equals(nome)) break;            
+                    }    
+                }else{
+                    // p(nivel+b.getNome()+" não tem filhos.");
+                }
             }
         }
-        
-        
-        
-        
+        // if(encontrado == null) p(nivel+"indo para proximo filho de "+b.getNome());
         return encontrado;
     }
     
 
     public Barbaro buscarBarbaro(String nome){
         if(raiz != null){
-            System.out.print("\nbuscando alguem chamado "+nome+"...");
-            return buscarBarbaro(nome, raiz, 0);
+            System.out.print("\nbuscando alguem chamado "+nome+"...\n");
+            return buscarBarbaro(nome, raiz, 0, false);
         }else{
-            p("não achou ninguem chamado "+ nome);
+            p("arvore vazia");
             return null;
         }
     }
 
+    public void distribuiBens(Barbaro b, int geracao){
+        if(!b.getFilhos().isEmpty()){
+            for (Barbaro filho : b.getFilhos()) {
+                filho.herdar(filho, geracao++);
+                distribuiBens(filho, geracao++);
+            }
+        }        
+    }
+
+    public void distribuiBens(){        
+        Barbaro aux = getRaiz();
+        distribuiBens(aux,0);
+    }
 
     public static void p(String s){
         System.out.println(s);
-      }
-
-
-    //   p("\n                               Não é ele. procurando nos filhos de "+b.getNome());
-    //         p("\n                               "+b.getNome() +" tem "+b.getFilhos().size()+" filhos:"); 
-    //         System.out.print("                               ");
-    //         for (Barbaro ggg : b.filhos) {
-    //             System.out.print(ggg.getNome()+", ");
-    //         }
-    //         p("");
-    //         for(int i = 0; i < b.getFilhos().size()+1;) {
-    //             Barbaro filho = b.getFilhos().get(i);
-    //             p("                               testando o filho "+b.getFilhos().get(i).getNome());
-    //             p("                               procurando nos filhos de "+filho.getNome()+":");                    
-    //             if(filho.getNome().equals(nome)){
-    //                 nivel++;
-    //                 System.out.print("\n                               ... É filho de "+filho.getNome()+"!!\n                               Geração "+ nivel+"\n");
-    //                 return buscarBarbaro(nome, filho, nivel);
-    //             }else{
-    //                 nivel++;                        
-    //                 System.out.print("\n                               ...não é filho de "+filho.getNome()+".\n                               Procurando nos filhos de "+ filho.getNome());
-    //                 p("\n                               procurando por "+nome+" relacionado a "+ filho.getNome());
-    //                 return buscarBarbaro(nome, filho, nivel);
-    //             }
-    
+      }    
 }

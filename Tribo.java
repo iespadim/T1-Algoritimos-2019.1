@@ -1,14 +1,14 @@
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
  
 public class Tribo {
  
-    public static void main(String[] args) {       
-
+    public static void main(String[] args) {      
       try {
         //configura e/s
-        String nomeDoArquivo = "casoMC4a.txt";
+        String nomeDoArquivo = "casoMC4b.txt";
         FileReader arq = new FileReader(nomeDoArquivo);
         BufferedReader reader = new BufferedReader(arq);   
         String linha = reader.readLine(); 
@@ -24,8 +24,7 @@ public class Tribo {
         // apriveita que ja está na segunda linha e pega dados para criar o primeiro filho também
         String pai = build[0]; 
         String nome = build[1];
-        Barbaro barbaro = new Barbaro(pai, conquista);
-        
+        Barbaro barbaro = new Barbaro(pai, conquista);        
 
         // inicia a arvore com o ancião criado
         ArvoreGenealogicaDePosse arvore = new ArvoreGenealogicaDePosse(barbaro);
@@ -61,12 +60,14 @@ public class Tribo {
         //fim de arquivo;
         arq.close();
         p("Fim que leitura de arquivo.");
+        arvore.distribuiBens();       
       } catch (IOException e) {
           String format = "Erro na abertura do arquivo: %s.\n";
           System.err.printf(format,
                   e.getMessage());
       }   
       System.out.println();
+      System.exit(0);
     }
 
     public static void p(String s){

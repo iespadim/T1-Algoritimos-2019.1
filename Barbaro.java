@@ -31,13 +31,19 @@ public class Barbaro{
     }
 
     public boolean addFilho(Barbaro b){
-        System.out.println("                               "+b.getNome()+ " agora é filho de "+getNome());
+        System.out.println(b.getNome()+ " agora é filho de "+getNome());
        return getFilhos().add(b);
     }
     
 
-    public void herdar(int landSize){
-        landOwned = +landSize;
+    public void herdar(Barbaro herdeiro, int nivel){
+        int fracao = getPai().getTerras()/getPai().getFilhos().size();
+        System.out.println(nome+" herdando "+fracao+" de "+getPai().getNome());
+        landOwned += fracao;
+
+        if(getFilhos().isEmpty()){
+            System.out.println(herdeiro.getNome()+" sem filhos na "+nivel+" geração e teve uma posse total de "+landOwned);
+        }
     }
 
     public int getTerras(){
