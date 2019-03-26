@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public static class ArvoreGenealogicaDePosse{
+public class ArvoreGenealogicaDePosse{
     private Barbaro raiz;
     private ArrayList<Barbaro> folhas = new ArrayList<>();
 

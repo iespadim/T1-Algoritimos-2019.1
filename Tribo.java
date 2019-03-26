@@ -1,18 +1,18 @@
 import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import org.enoir.graphvizapi;
  
 public class Tribo {
  
     public static void main(String[] args) {      
       try {
         //configura e/s
-        String nomeDoArquivo = "casoMC4a.txt";
+        String nomeDoArquivo = "casoMC4a.txt";          
         FileReader arq = new FileReader(nomeDoArquivo);
         BufferedReader reader = new BufferedReader(arq);   
         String linha = reader.readLine(); 
         String[] build = linha.split(" ");
+
 
         // inicializa a o tamanho da propriedade do ancião da aldeia
         int conquista = new Integer(build[0]);  

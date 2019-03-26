@@ -1,2 +1,2 @@
-# T2-Algoritimos-2019.1
-t2
+# T1-Algoritimos-2019.1
+T1 algoritmos e estruturas de dados II - Pucrs - Engenharia de Software
