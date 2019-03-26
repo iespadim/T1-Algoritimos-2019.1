@@ -54,7 +54,7 @@ public class Barbaro{
         if(getPai() == null){
             return nome+" é o ancião da tribo e tem propriedade de "+landOwned+"\n\n \n";
         } else{
-            return "Nome: "+nome+", filho de "+getPai().getNome()+", propriedade de "+landOwned+"\n";
+            return "Nome: "+nome+", filho de "+getPai().getNome()+", propriedade de "+landOwned+"tem "+getFilhos().size()+" filhos.\n";
         }
     }
 

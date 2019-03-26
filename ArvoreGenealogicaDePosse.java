@@ -1,5 +1,8 @@
+import java.util.ArrayList;
+
 public class ArvoreGenealogicaDePosse{
     private Barbaro raiz;
+    private ArrayList<Barbaro> folhas = new ArrayList<>();
 
     public ArvoreGenealogicaDePosse(Barbaro raiz){
         p("Arvore inicializada com ancião em sua raiz:");
@@ -58,7 +61,23 @@ public class ArvoreGenealogicaDePosse{
                 filho.herdar(filho, geracao++);
                 distribuiBens(filho, geracao++);
             }
+        }else{
+            folhas.add(b);
         }        
+    }
+
+    public String maisRico(){
+        Barbaro e = null;
+        for (Barbaro b : folhas) {
+            if(e==null){
+                e = b;
+            }else{
+                if(e.getTerras()<b.getTerras()){
+                    e=b;
+                }                
+            }
+        }
+        return e.toString();
     }
 
     public void distribuiBens(){        

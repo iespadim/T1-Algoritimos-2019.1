@@ -8,7 +8,7 @@ public class Tribo {
     public static void main(String[] args) {      
       try {
         //configura e/s
-        String nomeDoArquivo = "casoMC4b.txt";
+        String nomeDoArquivo = "casoMC14a.txt";
         FileReader arq = new FileReader(nomeDoArquivo);
         BufferedReader reader = new BufferedReader(arq);   
         String linha = reader.readLine(); 
@@ -35,6 +35,7 @@ public class Tribo {
         while (linha != null) {
           nlinha++;
           p("lendo a linha "+nlinha);
+          //quebra a linha em 3 - [pai] [nome do barbaro] [conquista em vida]
           build = linha.split(" ");
 
           pai = build[0];
@@ -43,10 +44,13 @@ public class Tribo {
           p("Começando a criar um barbaro:");
 
           p(nome+ " será filho de "+ pai  + " (se ele for encontrado), e adquiriu "+conquista+" terras ao longo de sua vida");
+          //busca o barbaro pai
           Barbaro aux = arvore.buscarBarbaro(pai);
+          //adiciona um filho ao pai
           Barbaro aux2 = new Barbaro(aux, nome, conquista);
 
           if(!aux.addFilho(aux2)){
+            //se por alguma razao nao conseguiu, informa
             p(aux2.getNome()+ " não é filho de "+aux.getNome());
           }
           p("");
@@ -60,7 +64,11 @@ public class Tribo {
         //fim de arquivo;
         arq.close();
         p("Fim que leitura de arquivo.");
-        arvore.distribuiBens();       
+
+        //passa as heranças uniformemente aos herdeiros
+        arvore.distribuiBens();
+        p(arvore.maisRico());
+               
       } catch (IOException e) {
           String format = "Erro na abertura do arquivo: %s.\n";
           System.err.printf(format,
