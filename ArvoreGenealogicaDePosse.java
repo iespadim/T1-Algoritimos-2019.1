@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
-public class ArvoreGenealogicaDePosse{
+public static class ArvoreGenealogicaDePosse{
     private Barbaro raiz;
     private ArrayList<Barbaro> folhas = new ArrayList<>();
 
     public ArvoreGenealogicaDePosse(Barbaro raiz){
-        p("Arvore inicializada com ancião em sua raiz:");
+        // p("Arvore inicializada com ancião em sua raiz:");
         this.raiz = raiz;
         this.raiz.toString();
     }
@@ -17,7 +17,7 @@ public class ArvoreGenealogicaDePosse{
     }
 
 
-    public Barbaro buscarBarbaro(String nome, Barbaro b, int nivel, boolean encontrou){        
+    public Barbaro buscarBarbaro(String nome, Barbaro b, boolean encontrou){        
         Barbaro encontrado = null;
 
         if(b.getNome().equals(nome)){            
@@ -26,13 +26,12 @@ public class ArvoreGenealogicaDePosse{
             
         }else{
             if(encontrou == false){
-                // p(nivel+"não é "+ b.getNome()+", ");            
+                // p(nivel+" não é "+ b.getNome()+", ");            
                 if(b.getFilhos().size()>0){
-                    //  System.out.println(nivel+"procurando nos  "+b.getFilhos().size()+" filhos de "+b.getNome());
-                    nivel++;
+                    //  System.out.println(nivel+"procurando nos  "+b.getFilhos().size()+" filhos de "+b.getNome());                    
                     for (Barbaro filho : b.getFilhos()) {
                         // p(nivel+"->filho "+filho.getNome());                   
-                        encontrado = buscarBarbaro(nome, filho, nivel, false);
+                        encontrado = buscarBarbaro(nome, filho, false);
                         if( encontrado != null && encontrado.getNome().equals(nome)) break;            
                     }    
                 }else{
@@ -47,14 +46,23 @@ public class ArvoreGenealogicaDePosse{
 
     public Barbaro buscarBarbaro(String nome){
         if(raiz != null){
-            System.out.print("\nbuscando alguem chamado "+nome+"...\n");
-            return buscarBarbaro(nome, raiz, 0, false);
+            // System.out.print("\nbuscando alguem chamado "+nome+"...\n");
+            return buscarBarbaro(nome, raiz, false);
         }else{
-            p("arvore vazia");
+            p("Arvore vazia");
             return null;
         }
     }
 
+    
+    // pega as terras da raiz e divide pelo numero de filhos
+    // supoe-se que a arvore ja está pronta.
+    public void distribuiBens(){        
+        Barbaro aux = getRaiz();
+        distribuiBens(aux,0);
+    }
+
+    //  metodo auxiliar para recursivamente ser chamado por distribuiBens();
     public void distribuiBens(Barbaro b, int geracao){
         if(!b.getFilhos().isEmpty()){
             for (Barbaro filho : b.getFilhos()) {
@@ -63,9 +71,11 @@ public class ArvoreGenealogicaDePosse{
             }
         }else{
             folhas.add(b);
+            b.setGeracao(geracao);
         }        
     }
 
+    // percorre o array de folhas e retorna a folha com mais getTerras();
     public String maisRico(){
         Barbaro e = null;
         for (Barbaro b : folhas) {
@@ -80,11 +90,7 @@ public class ArvoreGenealogicaDePosse{
         return e.toString();
     }
 
-    public void distribuiBens(){        
-        Barbaro aux = getRaiz();
-        distribuiBens(aux,0);
-    }
-
+    // print preguiçoso;
     public static void p(String s){
         System.out.println(s);
       }    

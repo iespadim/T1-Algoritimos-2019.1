@@ -8,7 +8,7 @@ public class Tribo {
     public static void main(String[] args) {      
       try {
         //configura e/s
-        String nomeDoArquivo = "casoMC14a.txt";
+        String nomeDoArquivo = "casoMC4a.txt";
         FileReader arq = new FileReader(nomeDoArquivo);
         BufferedReader reader = new BufferedReader(arq);   
         String linha = reader.readLine(); 
@@ -19,6 +19,7 @@ public class Tribo {
 
         // le a segunda linha a fim de descobrir qual o nome do ancião da aldeia
         linha = reader.readLine();
+        //quebra a linha em 3 - [pai] [nome do barbaro] [conquista em vida]
         build = linha.split(" ");
 
         // apriveita que ja está na segunda linha e pega dados para criar o primeiro filho também
@@ -30,20 +31,18 @@ public class Tribo {
         ArvoreGenealogicaDePosse arvore = new ArvoreGenealogicaDePosse(barbaro);
         p(barbaro.toString());
             
-        int nlinha = 1;
+        // int nlinha = 1;
         // le da segunda linha em diante
         while (linha != null) {
-          nlinha++;
-          p("lendo a linha "+nlinha);
+          // nlinha++;
+          // p("lendo a linha "+nlinha);
           //quebra a linha em 3 - [pai] [nome do barbaro] [conquista em vida]
           build = linha.split(" ");
-
           pai = build[0];
           nome = build[1];
           conquista = new Integer(build[2]);
-          p("Começando a criar um barbaro:");
-
-          p(nome+ " será filho de "+ pai  + " (se ele for encontrado), e adquiriu "+conquista+" terras ao longo de sua vida");
+          
+          // p(nome+ " será filho de "+ pai  + " (se ele for encontrado), e adquiriu "+conquista+" terras ao longo de sua vida");
           //busca o barbaro pai
           Barbaro aux = arvore.buscarBarbaro(pai);
           //adiciona um filho ao pai
@@ -53,20 +52,23 @@ public class Tribo {
             //se por alguma razao nao conseguiu, informa
             p(aux2.getNome()+ " não é filho de "+aux.getNome());
           }
-          p("");
-          p("");
-          p("");
-         
 
-          linha = reader.readLine(); //pula para a proxima linha;
+          //pula para a proxima linha;
+          linha = reader.readLine(); 
         }
 
+        
         //fim de arquivo;
         arq.close();
         p("Fim que leitura de arquivo.");
+        
+        // aqui a arvore está pronta
 
-        //passa as heranças uniformemente aos herdeiros
+        // percorre a arvore da raiz, distribuindo igualmente a propriedade da geração anterior.
+        // se o nodo for uma folha, adiciona-o a um array, chamado folhas.
         arvore.distribuiBens();
+        
+        // percorre o array buscando a folha que tem mais getTerras();
         p(arvore.maisRico());
                
       } catch (IOException e) {
@@ -78,6 +80,7 @@ public class Tribo {
       System.exit(0);
     }
 
+    // print preguiçoso
     public static void p(String s){
       System.out.println(s);
     }
