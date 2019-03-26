@@ -40,7 +40,6 @@ public class Barbaro{
     }
 
     public boolean addFilho(Barbaro b){
-        // System.out.println(b.getNome()+ " agora é filho de "+getNome());
         return getFilhos().add(b);
     }
     
@@ -48,13 +47,7 @@ public class Barbaro{
     public void herdar(Barbaro herdeiro, int nivel){
         // terras do pai / nr filhos
         int fracao = (getPai().getTerras()) / (getPai().getFilhos().size());
-
-        // System.out.println(nome+" herdando "+fracao+" de "+getPai().getNome());
         landOwned += fracao;
-
-        if(getFilhos().isEmpty()){
-            System.out.println(herdeiro.getNome()+" sem filhos na "+nivel+" geração e teve uma posse total de "+landOwned);
-        }
     }
 
     public int getTerras(){
@@ -65,7 +58,7 @@ public class Barbaro{
         if(getPai() == null){
             return nome+" é o ancião da tribo e tem propriedade de "+landOwned+"\n\n \n";
         } else{
-            return nome+", filho de "+getPai().getNome()+", propriedade de "+landOwned+" tem "+getFilhos().size()+" filhos. "+getGeracao()+" geração \n";
+            return nome+", filho de "+getPai().getNome()+", propriedade de "+landOwned+" tem "+getFilhos().size()+" filhos. Herdeiro de "+getGeracao()+" geração \n";
         }
     }
 

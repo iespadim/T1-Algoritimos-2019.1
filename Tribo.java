@@ -19,7 +19,7 @@ public class Tribo {
 
         // le a segunda linha a fim de descobrir qual o nome do ancião da aldeia
         linha = reader.readLine();
-        //quebra a linha em 3 - [pai] [nome do barbaro] [conquista em vida]
+        //quebra a segunda linha em 3 - [pai] [nome do barbaro] [conquista em vida]
         build = linha.split(" ");
 
         // apriveita que ja está na segunda linha e pega dados para criar o primeiro filho também
@@ -45,9 +45,9 @@ public class Tribo {
           // p(nome+ " será filho de "+ pai  + " (se ele for encontrado), e adquiriu "+conquista+" terras ao longo de sua vida");
           //busca o barbaro pai
           Barbaro aux = arvore.buscarBarbaro(pai);
-          //adiciona um filho ao pai
-          Barbaro aux2 = new Barbaro(aux, nome, conquista);
 
+          //cria um novo barbaro e adiciona-o como filho do pai
+          Barbaro aux2 = new Barbaro(aux, nome, conquista);
           if(!aux.addFilho(aux2)){
             //se por alguma razao nao conseguiu, informa
             p(aux2.getNome()+ " não é filho de "+aux.getNome());
@@ -65,10 +65,9 @@ public class Tribo {
         // aqui a arvore está pronta
 
         // percorre a arvore da raiz, distribuindo igualmente a propriedade da geração anterior.
-        // se o nodo for uma folha, adiciona-o a um array, chamado folhas.
         arvore.distribuiBens();
         
-        // percorre o array buscando a folha que tem mais getTerras();
+        // percorre a arvore buscando folhas. As folhas estão referenciadas em Arraylist<Barbaro> folhas internamente em ArvoreGenealogicaDePosse
         p(arvore.maisRico());
                
       } catch (IOException e) {
