@@ -7,7 +7,7 @@ public class Tribo {
     public static void main(String[] args) {      
       try {
         //configura e/s
-        String nomeDoArquivo = "casoMC4a.txt";          
+        String nomeDoArquivo = "casoteste.txt";          
         FileReader arq = new FileReader(nomeDoArquivo);
         BufferedReader reader = new BufferedReader(arq);   
         String linha = reader.readLine(); 
