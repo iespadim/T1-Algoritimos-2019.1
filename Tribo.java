@@ -75,6 +75,7 @@ public class Tribo {
             arvore.distribuiBens();
             
             // percorre a arvore buscando folhas. As folhas estão referenciadas em Arraylist<Barbaro> folhas internamente em ArvoreGenealogicaDePosse
+            System.out.print("o guerreiro com mais terras é: ");
             p(arvore.maisRico());
                   
           } catch (IOException e) {
